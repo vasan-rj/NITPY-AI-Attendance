@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="attendenceApp">
+<html lang="en" ng-app="attendanceApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="static\script\loginSignup.js"></script>
+    <script src="static/script/appcontroller.js"></script>
 </head>
-<body>
-    <h3>Yeap u done it</h3>
+<body ng-controller="LoginController">
+    <div>
+        <button ng-click="goToStudentPage()">Student Login</button>
+        <button ng-click="goToFacultyPage()">Faculty Login</button>
+    </div>
 </body>
+</html>
