@@ -1,7 +1,9 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
 }
 
 .container {
@@ -13,7 +15,8 @@ body {
 
 header {
     grid-column: 1 / 3;
-    background-color: #f5f5f5;
+    background-color: #00539C;
+    color: #fff;
     display: flex;
     align-items: center;
     padding: 0 20px;
@@ -25,7 +28,8 @@ header .logo {
 }
 
 aside {
-    background-color: #e9e9e9;
+    background-color: #0073E6;
+    color: #fff;
     padding: 20px;
 }
 
@@ -36,7 +40,16 @@ aside nav ul {
 
 aside nav ul li {
     margin-bottom: 10px;
-    cursor: pointer;
+}
+
+aside nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+aside nav ul li a:hover {
+    text-decoration: underline;
 }
 
 main {
@@ -52,25 +65,40 @@ main {
 .attendance table {
     width: 100%;
     border-collapse: collapse;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 }
 
 .attendance th, .attendance td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 12px;
     text-align: center;
 }
 
 .attendance th {
     background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.attendance tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.attendance tr:hover {
+    background-color: #f1f1f1;
 }
 
 .attendance .table-contents {
     margin-top: 20px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .attendance .table-contents ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 .performance {
@@ -78,6 +106,9 @@ main {
 }
 
 .performance-chart {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
@@ -92,6 +123,7 @@ main {
 .performance-chart ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
     text-align: left;
     display: inline-block;
 }
