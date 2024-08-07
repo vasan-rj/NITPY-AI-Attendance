@@ -5,6 +5,7 @@
     <title>Teacher Dashboard</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="static\script\appcontroller.js"></script>
     <style>
         
         body {
@@ -58,7 +59,7 @@
     </style>
 </head>
 <body>
-    <div ng-controller="MainController">
+    <div ng-controller="FacultypageController">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2 sidebar">
@@ -112,11 +113,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="student in students">
-                                    <td>{{student.rollNo}}</td>
-                                    <td>{{student.status}}</td>
-                                    <td><input type="checkbox" ng-model="student.change"></td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                         <button class="btn btn-warning btn-warning-animated" ng-click="commitChange()">Commit Change</button>
@@ -128,32 +125,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        var app = angular.module('attendanceApp', []);
-        app.controller('MainController', function($scope) {
-            $scope.attendance = {};
-            $scope.students = [
-                { rollNo: 'CS21B10XX', status: 'Absent', change: false },
-                { rollNo: 'CS21B10YY', status: 'Absent', change: false },
-                { rollNo: 'CS21B10ZZ', status: 'Absent', change: false }
-            ];
-
-            $scope.takeAttendance = function() {
-               
-                alert('Attendance taken for ' + $scope.attendance.classRoom);
-            };
-
-            $scope.commitChange = function() {
-               
-                $scope.students.forEach(function(student) {
-                    if (student.change) {
-                        student.status = student.status === 'Absent' ? 'Present' : 'Absent';
-                    }
-                });
-                alert('Changes committed');
-            };
-        });
-    </script>
 </body>
 </html>
