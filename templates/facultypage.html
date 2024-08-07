@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="attendanceApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        /* Add custom styles here */
+        body {
+            padding: 20px;
+        }
+        .sidebar {
+            height: 100vh;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+        .main-content {
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .form-control, .btn {
+            margin-bottom: 10px;
+        }
+        .attendance-table {
+            margin-top: 20px;
+        }
+        .performance-chart {
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        .btn-animated {
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn-animated:hover {
+            background-color: #5cb85c;
+            transform: scale(1.05);
+        }
+        .btn-warning-animated {
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn-warning-animated:hover {
+            background-color: #f0ad4e;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="MainController">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 sidebar">
+                    <div class="navbar-brand">WebsiteLogo</div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Take Attendance</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Overall</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Manipulate</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-10 main-content">
+                    <h2>Take Attendance</h2>
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="year">Year</label>
+                                <input type="text" class="form-control" id="year" ng-model="attendance.year">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="startTime">Start Time</label>
+                                <input type="time" class="form-control" id="startTime" ng-model="attendance.startTime">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="department">Department</label>
+                                <input type="text" class="form-control" id="department" ng-model="attendance.department">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="endTime">End Time</label>
+                                <input type="time" class="form-control" id="endTime" ng-model="attendance.endTime">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="classRoom">Class Room</label>
+                                <input type="text" class="form-control" id="classRoom" ng-model="attendance.classRoom">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success btn-animated" ng-click="takeAttendance()">Take Attendance</button>
+                    </form>
+                    <div class="attendance-table">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Roll No.</th>
+                                    <th>Status</th>
+                                    <th>Make change</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="student in students">
+                                    <td>{{student.rollNo}}</td>
+                                    <td>{{student.status}}</td>
+                                    <td><input type="checkbox" ng-model="student.change"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-warning btn-warning-animated" ng-click="commitChange()">Commit Change</button>
+                    </div>
+                    <div class="performance-chart">
+                        Performance Chart
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var app = angular.module('attendanceApp', []);
+        app.controller('MainController', function($scope) {
+            $scope.attendance = {};
+            $scope.students = [
+                { rollNo: 'CS21B10XX', status: 'Absent', change: false },
+                { rollNo: 'CS21B10YY', status: 'Absent', change: false },
+                { rollNo: 'CS21B10ZZ', status: 'Absent', change: false }
+            ];
+
+            $scope.takeAttendance = function() {
+                // Logic for taking attendance
+                alert('Attendance taken for ' + $scope.attendance.classRoom);
+            };
+
+            $scope.commitChange = function() {
+                // Logic for committing changes
+                $scope.students.forEach(function(student) {
+                    if (student.change) {
+                        student.status = student.status === 'Absent' ? 'Present' : 'Absent';
+                    }
+                });
+                alert('Changes committed');
+            };
+        });
+    </script>
+</body>
+</html>
