@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <style>
-        /* Add custom styles here */
+        
         body {
             padding: 20px;
         }
@@ -140,12 +140,12 @@
             ];
 
             $scope.takeAttendance = function() {
-                // Logic for taking attendance
+               
                 alert('Attendance taken for ' + $scope.attendance.classRoom);
             };
 
             $scope.commitChange = function() {
-                // Logic for committing changes
+               
                 $scope.students.forEach(function(student) {
                     if (student.change) {
                         student.status = student.status === 'Absent' ? 'Present' : 'Absent';
