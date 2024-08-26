@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f5f7;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.login-section {
+    flex: 1;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-box {
+    max-width: 400px;
+    width: 100%;
+    text-align: left;
+}
+
+.brand {
+    color: #0a76e8;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+h2 {
+    /* color: #0a76e8;
+     */
+     color: #527196a1;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.extras {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.extras a {
+    color: #0a76e8;
+    text-decoration: none;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.btn-login {
+    background-color: #0a76e8;
+    color: #fff;
+}
+
+.btn-signup {
+    background-color: #fff;
+    color: #0a76e8;
+    border: 1px solid #0a76e8;
+}
+
+.social-login {
+    text-align: center;
+}
+
+.social-login p {
+    margin-bottom: 10px;
+}
+
+.social-login a {
+    margin: 0 10px;
+    color: #0a76e8;
+    text-decoration: none;
+}
+
+.animation-section {
+    flex: 1;
+    background-color: #f4f5f7;
+    position: relative;
+    padding: 20px;
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    margin-bottom: 40px;
+}
+
+.nav li {
+    margin: 0 10px;
+}
+
+.nav a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.nav a:hover {
+    border-bottom: 2px solid #0a76e8;
+}
+
+.bike-animation {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bike {
+    width: 300px;
+    /* animation: moveBike 5s infinite ease-in-out; */
+}
+
+@keyframes moveBike {
+    0% {
+        transform: translateX(-100px);
+    }
+    50% {
+        transform: translateX(100px);
+    }
+    100% {
+        transform: translateX(-100px);
+    }
+}
