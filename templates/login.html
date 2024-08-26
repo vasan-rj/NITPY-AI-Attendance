@@ -1,16 +1,153 @@
+
+
+
+
 <!DOCTYPE html>
-<html lang="en" ng-app="attendanceApp">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="static/script/appcontroller.js"></script>
+    <title>NIT PY Smart Attendance</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+        }
+        .hero-section {
+            background-color: #0a76e8;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+        }
+        .hero-section h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        .hero-section p {
+            font-size: 1.2em;
+        }
+        .btn-custom {
+            color: #0a76e8;
+            background-color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .image-section img {
+            width: 60%;
+            height:60%;
+            {% comment %} margin-top: -50px; {% endcomment %}
+        }
+        .category-section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .category-card {
+            background-color: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px;
+            transition: transform 0.3s;
+        }
+        .category-card:hover {
+            transform: scale(1.05);
+        }
+        .why-choose-us {
+            padding: 40px 20px;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        .why-choose-us h2 {
+            font-size: 2em;
+        }
+        .reason-card {
+            margin: 20px 0;
+        }
+        .reason-card p {
+            font-size: 1.1em;
+        }
+    </style>
 </head>
-<body ng-controller="LoginController">
-    <div>
-        <button ng-click="goToStudentPage()">Student Login</button>
-        <button ng-click="goToFacultyPage()">Faculty Login</button>
+<body>
+    <!-- Header Section -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">NIT PY SMART ATTENDENCE</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Revolutionize Attendance with AI-Powered Precision</h1>
+        <p>"Effortless, Accurate, and Secure Attendance Tracking for Modern Education"
+
+            .</p>
+        <!-- Redirect to student login page -->
+        <button class="btn-custom" onclick="window.location.href='studentpage.html'">Student Login</button>
+        
+        <!-- Redirect to faculty login page -->
+        <button class="btn-custom" onclick="window.location.href='facultypage.html'">Faculty Login</button>
+
+        <div class="image-section">
+            <img src="../static/assets/Seminar-pana.png" alt="Woman with tablet">
+        </div>
     </div>
+
+    <!-- Category Section -->
+    <div class="category-section">
+        <h2>Features</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-3 category-card">
+                <h4>Automated Attendance Tracking</h4>
+                <p>Automatically capture daily attendance for all classes using facial recognition</p>
+            </div>
+            <div class="col-md-3 category-card">
+                <h4>Real-Time Attendence Notifications</h4>
+                <p>Instantly notify students and faculty of their attendance status through message notifications.</p>
+            </div>
+            <div class="col-md-3 category-card">
+                <h4>Detailed Analytics and Reporting</h4>
+                <p>Generate comprehensive attendance reports that offer insights into attendance patterns, overall attendance rates, and individual student attendance..</p>
+            </div>
+           
+        </div>
+    </div>
+
+    <!-- Why Choose Us Section -->
+    <div class="why-choose-us">
+        <h2>UseCases</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-3 reason-card">
+
+                <h5>Parent and Guardian Updates</h5>
+                <p>Provides real-time monitoring for every test and results to parents , allowing them to stay informed about their child's presence in classes.</p>
+            </div>
+            <div class="col-md-3 reason-card">
+                <h5>Daily Attendance Monitoring</h5>
+                <p> minimizing time spent on administrative tasks and maximizing class time.</p>
+            </div>
+            <div class="col-md-3 reason-card">
+                <h5>Streamlined Administrative Processes</h5>
+                <p>Simplify administrative tasks such as record-keeping and attendance calculations, freeing up staff to focus on more critical academic and support functions.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

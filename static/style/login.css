@@ -1,0 +1,45 @@
+.hero-section {
+    background-color: #563d7c;
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+}
+
+.hero-section h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.hero-section p {
+    font-size: 1.2em;
+}
+
+.btn-custom {
+    background-color: #f0b90b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.category-section {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.category-card {
+    background-color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px;
+    transition: transform 0.3s;
+}
+
+.why-choose-us {
+    padding: 40px 20px;
+    background-color: #f0f0f0;
+    text-align: center;
+}
