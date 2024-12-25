@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Attendance System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 800px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #0056b3;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input, select, button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 2px solid #0056b3;
+            background-color: #e6f7ff;
+            cursor: pointer;
+        }
+        button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #004080;
+        }
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .attendance-table th, .attendance-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .attendance-table th {
+            background-color: #0056b3;
+            color: white;
+        }
+        .attendance-table td {
+            text-align: center;
+        }
+        .actions-btns {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .actions-btns button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+        .actions-btns button.edit-btn {
+            background-color: #4caf50;
+        }
+        .actions-btns button.delete-btn {
+            background-color: #f44336;
+        }
+        .actions-btns button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Attendance System</h1>
+        
+        <!-- Subject Selection, Date, and Time -->
+        <div>
+            <label for="subject">Subject:</label>
+            <select id="subject">
+                <option value="Mathematics">Mathematics</option>
+                <option value="Physics">Physics</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Biology">Biology</option>
+                <option value="English">English</option>
+            </select>
+            
+            <label for="date">Date:</label>
+            <input type="date" id="date">
+            
+            <label for="start-time">Start Time:</label>
+            <input type="time" id="start-time">
+            
+            <label for="end-time">End Time:</label>
+            <input type="time" id="end-time">
+        </div>
+        
+        <!-- Attendance Table -->
+        <h2>Attendance Records</h2>
+        <table class="attendance-table" id="attendanceTable">
+            <thead>
+                <tr>
+                    <th>Roll Number</th>
+                    <th>Confidence Score</th>
+                    <th>Timestamp</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic Rows -->
+            </tbody>
+        </table>
+        
+        <!-- Action Buttons -->
+        <div>
+            <button onclick="addStudentRow()">Add Student</button>
+            <button onclick="clearAll()">Clear All</button>
+            <button onclick="addToDatabase()">Add To Database</button>
+        </div>
+    </div>
+
+    <script>
+        const table = document.getElementById("attendanceTable").querySelector("tbody");
+
+        function addStudentRow() {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td contenteditable="true">New Roll</td>
+                <td contenteditable="true">Confidence</td>
+                <td contenteditable="true">Timestamp</td>
+                <td>
+                    <div class="actions-btns">
+                        <button class="edit-btn" onclick="editRow(this)">Edit</button>
+                        <button class="delete-btn" onclick="deleteRow(this)">Delete</button>
+                    </div>
+                </td>
+            `;
+            table.appendChild(row);
+        }
+
+        function clearAll() {
+            table.innerHTML = '';
+        }
+
+        function editRow(button) {
+            const row = button.closest("tr");
+            row.contentEditable = true;
+            row.style.backgroundColor = "#fffae6";
+        }
+
+        function deleteRow(button) {
+            const row = button.closest("tr");
+            if (confirm("Are you sure you want to delete this row?")) {
+                row.remove();
+            }
+        }
+
+        function addToDatabase() {
+            const subject = document.getElementById("subject").value;
+            const date = document.getElementById("date").value;
+            const startTime = document.getElementById("start-time").value;
+            const endTime = document.getElementById("end-time").value;
+
+            const rows = table.querySelectorAll("tr");
+            const presentStudents = Array.from(rows).map(row => {
+                const rollNumber = row.querySelector("td")?.innerText;
+                return rollNumber;
+            }).filter(roll => roll);
+
+            const data = {
+                date:date,
+                timing:startTime
+                duration: `${startTime} - ${endTime}`,
+                subject:subject,
+                present_students: presentStudents
+            };
+
+            fetch("/add-to-database", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                alert(result.message || "Data successfully added to the database!");
+            })
+            .catch(error => {
+                console.error("Error adding data to the database:", error);
+                alert("Failed to add data to the database.");
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+{% comment %} 
+ {% endcomment %}
+
+ <h1>AI Attendance System</h1>
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit">Upload and Predict</button>
+        </form>

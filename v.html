@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Settings and AI Attendance System</title>
+    <style>
+        /* Basic Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            color: #555;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        .action-buttons button {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        .add-button {
+            margin-top: 10px;
+        }
+        .progress-container {
+            margin-top: 20px;
+        }
+        .progress-bar-wrapper {
+            width: 100%;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 25px;
+            margin-top: 10px;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #28a745;
+            text-align: center;
+            line-height: 25px;
+            color: white;
+            border-radius: 8px;
+            width: 0;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Faculty Settings and AI Attendance System</h1>
+
+    <!-- Profile Section -->
+    <div class="section" id="profile-settings">
+        <h2>Profile Information</h2>
+        <label for="faculty-id">Faculty ID</label>
+        <input type="text" id="faculty-id" placeholder="xxx" value={{username}} required>
+
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="e.g. DR.Leo Das" required>
+
+        <label for="department">Department</label>
+        <select id="department">
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="CIVIL">CIVIL</option>
+            <option value="MECH">MECH</option>
+        </select>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" value="faculty@example.com" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" value="+91-9876543210" required>
+    </div>
+
+    <!-- Subjects Section -->
+    <div class="section">
+        <h2>Subjects Handled</h2>
+        <label for="subject-name">Subject Name</label>
+        <input type="text" id="subject-name">
+
+        <label for="subject-code">Subject Code</label>
+        <input type="text" id="subject-code">
+
+        <label for="batch">Batch</label>
+        <input type="text" id="batch" placeholder="e.g., 2021-2025">
+
+        <button class="add-button" onclick="addSubject()">Add Subject</button>
+
+        <!-- Subjects Table -->
+        <table id="subjects-table">
+            <thead>
+                <tr>
+                    <th>Subject Name</th>
+                    <th>Subject Code</th>
+                    <th>Batch</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Subject rows will be added here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Password Section -->
+    <div class="section" id="password-settings">
+        <h2>Change Password</h2>
+        <label for="current-password">Current Password</label>
+        <input type="password" id="current-password" placeholder="Enter current password">
+
+        <label for="new-password">New Password</label>
+        <input type="password" id="new-password" placeholder="Enter new password">
+
+        <label for="confirm-password">Confirm New Password</label>
+        <input type="password" id="confirm-password" placeholder="Re-enter new password">
+    </div>
+
+    <!-- Save Button -->
+    <div style="text-align: center;">
+        <button onclick="saveChanges()">Save Changes</button>
+    </div>
+
+    <!-- Upload Dataset Form -->
+    <div class="section">
+        <h2>Upload Dataset for AI Attendance</h2>
+        <form id="uploadForm">
+            <label for="file">Upload Dataset (ZIP):</label>
+            <input type="file" id="file" name="file" accept=".zip" required>
+            <button type="submit">Upload and Process</button>
+        </form>
+    </div>
+
+    <!-- Training Status -->
+    <div class="section">
+        <h2>Training Status</h2>
+        <div class="status-container">
+            <h3>Training Status:</h3>
+            <p id="train-status">Awaiting updates...</p>
+        </div>
+    </div>
+
+    <!-- Training Progress -->
+    <div class="section" id="progressContainer" style="display: none;">
+        <h2>Training Progress</h2>
+        <p>Training Progress:</p>
+        <div class="progress-bar-wrapper">
+            <div class="progress-bar" id="progressBar">0%</div>
+        </div>
+    </div>
+
+    <!-- Recognize Frame -->
+    <div class="section">
+        <h2>Frame Recognition</h2>
+        <form id="recognizeForm">
+            <label for="frame">Upload Frame for Recognition:</label>
+            <input type="file" id="frame" name="frame" accept="image/*" required>
+            <button type="submit">Recognize</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    &copy; 2024 AI Attendance System. All rights reserved.
+</footer>
+
+<script>
+    // Add Subject to Table
+    function addSubject() {
+        const subjectName = document.getElementById("subject-name").value;
+        const subjectCode = document.getElementById("subject-code").value;
+        const batch = document.getElementById("batch").value;
+
+        if (!subjectName || !subjectCode || !batch) {
+            alert("Please fill out all fields for the subject.");
+            return;
+        }
+
+        const table = document.getElementById("subjects-table").getElementsByTagName("tbody")[0];
+        const newRow = table.insertRow();
+        newRow.innerHTML = `
+            <td>${subjectName}</td>
+            <td>${subjectCode}</td>
+            <td>${batch}</td>
+            <td class="action-buttons">
+                <button onclick="editRow(this)">Edit</button>
+                <button onclick="deleteRow(this)">Delete</button>
+            </td>
+        `;
+
+        // Clear input fields after adding
+        document.getElementById("subject-name").value = "";
+        document.getElementById("subject-code").value = "";
+        document.getElementById("batch").value = "";
+    }
+
+    // Edit Row in Table
+    function editRow(button) {
+        const row = button.parentNode.parentNode;
+        document.getElementById("subject-name").value = row.cells[0].innerText;
+        document.getElementById("subject-code").value = row.cells[1].innerText;
+        document.getElementById("batch").value = row.cells[2].innerText;
+        row.remove();
+    }
+
+    // Delete Row from Table
+    function deleteRow(button) {
+        button.parentNode.parentNode.remove();
+    }
+
+    // Save Changes Function
+    function saveChanges() {
+        alert("Changes saved successfully!");
+    }
+
+    // Handle File Upload for Dataset
+    document.getElementById("uploadForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const fileInput = document.getElementById("file");
+        const file = fileInput.files[0];
+        if (file) {
+            alert("Dataset uploaded successfully!");
+            updateProgress(50); // Example progress update
+        }
+    });
+
+    // Training Progress Bar
+    function updateProgress(percentage) {
+        const progressBar = document.getElementById("progressBar");
+        progressBar.style.width = `${percentage}%`;
+        progressBar.innerText = `${percentage}%`;
+        document.getElementById("progressContainer").style.display = 'block';
+    }
+
+    // Handle Frame Recognition
+    document.getElementById("recognizeForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        alert("Frame recognized successfully!");
+    });
+</script>
+
+</body>
+</html>

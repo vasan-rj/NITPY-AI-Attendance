@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+}
+
+.brand h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    margin-bottom: 15px;
+}
+
+.menu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #f4f6f9;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+header .search-profile {
+    display: flex;
+    align-items: center;
+}
+
+header input[type="text"] {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    margin-right: 15px;
+}
+
+header .profile-pic img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.timesheet .hours {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.timesheet .hours h3 {
+    font-size: 2rem;
+    color: #007bff;
+}
+
+.timesheet button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.statistics ul,
+.today-activity ul {
+    list-style: none;
+    padding: 0;
+}
+
+.statistics li,
+.today-activity li {
+    margin-bottom: 10px;
+}
+
+.attendance-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.attendance-list th,
+.attendance-list td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.daily-records .chart {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f6f9;
+    border-radius: 8px;
+    color: #007bff;
+    font-size: 1.2rem;
+}

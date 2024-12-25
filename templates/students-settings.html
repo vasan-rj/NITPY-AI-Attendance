@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            color: #555;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .image-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        .image-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 120px;
+            text-align: center;
+        }
+        .image-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .image-item label {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #555;
+        }
+        .image-item input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 15px;
+            }
+            .image-item {
+                width: 100px;
+            }
+            h1, .section h2 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>User Settings</h1>
+
+    <!-- Profile Section -->
+    <div class="section" id="profile-settings">
+        <h2>Profile Information</h2>
+        <label for="username">Username</label>
+        <input type="text" id="username" value="{{username}}" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" value="john.doe@example.com" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" value="+91-1234567890" required>
+    </div>
+
+
+    <!-- Image Upload Section -->
+    <div class="section">
+        <h2>Upload Your Images</h2>
+        <div class="image-grid" id="image-preview">
+            <!-- Image items -->
+            <div class="image-item">
+                <img id="preview1" src="../static/assets/man.png" alt="Image Preview 1">
+                <label for="image1">Plain Background</label>
+                <input type="file" id="image1" accept="image/*" onchange="previewImage(1)">
+            </div>
+            <div class="image-item">
+                <img id="preview2" src="../static/assets/img2.png" alt="Image Preview 2">
+                <label for="image2">Sitting on Bench</label>
+                <input type="file" id="image2" accept="image/*" onchange="previewImage(2)">
+            </div>
+            <div class="image-item">
+                <img id="preview3" src="../static/assets/img3.png" alt="Image Preview 3">
+                <label for="image3">Relaxed Face</label>
+                <input type="file" id="image3" accept="image/*" onchange="previewImage(3)">
+            </div>
+            <div class="image-item">
+                <img id="preview4" src="../static/assets/img4.png" alt="Image Preview 4">
+                <label for="image4">Happy Face</label>
+                <input type="file" id="image4" accept="image/*" onchange="previewImage(4)">
+            </div>
+            <div class="image-item">
+                <img id="preview5" src="../static/assets/img5.png" alt="Image Preview 5">
+                <label for="image4">Bright Face</label>
+                <input type="file" id="image5" accept="image/*" onchange="previewImage(5)">
+            </div>
+            <div class="image-item">
+                <img id="preview6" src="../static/assets/img6.png" alt="Image Preview 6">
+                <label for="image6">Anger Face</label>
+                <input type="file" id="image6" accept="image/*" onchange="previewImage(6)">
+            </div>
+            <div class="image-item">
+                <img id="preview7" src="../static/assets/img7.png" alt="Image Preview 7">
+                <label for="image7">Sad Face</label>
+                <input type="file" id="image7" accept="image/*" onchange="previewImage(7)">
+            </div>
+            <div class="image-item">
+                <img id="preview8" src="../static/assets/img8.png" alt="Image Preview 8">
+                <label for="image8">Eyes Closed Face</label>
+                <input type="file" id="image8" accept="image/*" onchange="previewImage(8)">
+            </div>
+            <div class="image-item">
+                <img id="preview9" src="../static/assets/img9.png" alt="Image Preview 9">
+                <label for="image9">With Sunglass</label>
+                <input type="file" id="image9" accept="image/*" onchange="previewImage(9)">
+            </div>
+            <div class="image-item">
+                <img id="preview10" src="../static/assets/img10.png" alt="Image Preview 10">
+                <label for="image10">With Face Mask</label>
+                <input type="file" id="image10" accept="image/*" onchange="previewImage(10)">
+            </div>
+            <div class="image-item">
+                <img id="preview11" src="../static/assets/img11.png" alt="Image Preview 11">
+                <label for="image11">Outdoor Image</label>
+                <input type="file" id="image11" accept="image/*" onchange="previewImage(11)">
+            </div>
+            <div class="image-item">
+                <img id="preview12" src="../static/assets/img12.png" alt="Image Preview 12">
+                <label for="image12">Window Image</label>
+                <input type="file" id="image12" accept="image/*" onchange="previewImage(12)">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Password Section -->
+    <div class="section" id="password-settings">
+        <h2>Change Password</h2>
+        <label for="current-password">Current Password</label>
+        <input type="password" id="current-password" placeholder="Enter current password">
+
+        <label for="new-password">New Password</label>
+        <input type="password" id="new-password" placeholder="Enter new password">
+
+        <label for="confirm-password">Confirm New Password</label>
+        <input type="password" id="confirm-password" placeholder="Re-enter new password">
+    </div>
+
+    <!-- Save Button -->
+    <div style="text-align: center;">
+        <button onclick="saveChanges()">Save Changes</button>
+    </div>
+</div>
+
+<script>
+
+    function previewImage(index) {
+        const fileInput = document.getElementById(`image${index}`);
+        const previewImg = document.getElementById(`preview${index}`);
+
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewImg.src = e.target.result;
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+
+    function saveChanges() 
+    {
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const currentPassword = document.getElementById('current-password')?.value || '';
+        const newPassword = document.getElementById('new-password')?.value || '';
+        const confirmPassword = document.getElementById('confirm-password')?.value || '';
+       
+        if (newPassword && newPassword !== confirmPassword) {
+            alert("New passwords do not match.");
+            return;
+        }
+
+     
+        const images = [];
+        const encodedImages = [];
+        const reader = new FileReader();
+
+        
+        for (let i = 1; i <= 12; i++) 
+        {
+            const fileInput = document.getElementById(`image${i}`);
+            if (fileInput && fileInput.files && fileInput.files[0]) {
+                images.push(fileInput.files[0]);
+                
+            } else {
+                alert(`Please upload all 12 images. Missing image ${i}.`);
+                return;
+            }
+        }
+        console.error(images)
+        if (images.length < 12) 
+        {
+            alert("Please upload all 12 images before saving.");
+            
+        }
+       
+        const readImages = (index) => 
+        {
+            if (index >= images.length) {
+                sendRequest(data);
+                alert("sendRequest Sent !!")
+                return;
+            }
+            
+            const file = images[index];
+
+            
+            reader.onload = function (e) {
+                encodedImages.push(e.target.result.split(',')[1]); // Base64 encode
+                readImages(index + 1);
+                };
+            reader.readAsDataURL(file);
+          
+
+        };
+        console.error(encodedImages)
+
+        readImages(0);
+
+        const data = 
+        {
+            username,
+            email,
+            phone,
+            images: encodedImages
+        };
+    if(!currentPassword)
+    {
+        data.newPassword = newPassword;
+    }
+    
+}
+
+function sendRequest(data) {
+        fetch('/update_user_settings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => alert(data.message))
+        .catch(error => console.error('Error: VasanD', error));
+        alert("Settings saved!");
+}
+
+</script>
+
+</body>
+</html>
+
+
+
+

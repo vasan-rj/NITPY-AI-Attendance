@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Login</title>
+    <link rel="stylesheet" href="../static/style/studentlogin.css">
+   
+</head>
+<body>
+    <div class="container">
+        <div class="login-section">
+            <div class="login-box">
+                <h1 class="brand">NITPY Ai Attendance</h1>
+                <h2>Faculty Login</h2>
+              
+                <form id="loginForm" action="{{ url_for('login_faculty') }}" method="POST">
+                    
+                    <div class="input-group">
+                        <label for="username">Faculty ID</label>
+                        <input type="text" id="username" name="username" placeholder="hakeem@digital.com">
+                    </div>
+                  
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="************">
+                    </div>
+
+                    <div class="extras">
+                        <label>
+                            <input type="checkbox"> Remember Me
+                        </label>
+                        <a href="#">Forgot Password?</a>
+                    </div>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class="flash-messages">
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% endwith %}
+
+                    <div class="action-buttons">
+                        <button type="submit" class="btn btn-login">Login</button>
+                        <button type="button" class="btn btn-login" onclick="window.location.href='{{ url_for('signup_faculty') }}'">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+      
+        <div class="animation-section">
+            <ul class="nav">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Pricing</a></li>
+            </ul>
+            <div class="bike-animation">
+                <img src="../static/assets/3.png" alt="Person on bike" class="bike">
+            </div>
+        </div>
+    </div>
+    <style>
+        .flash-messages {
+            list-style-type: none;
+            padding: 0;
+            margin: 15px 0;
+            color: red; /* You can customize the color */
+            font-weight: bold; /* Makes it stand out */
+        }
+    </style>
+</body>
+</html>

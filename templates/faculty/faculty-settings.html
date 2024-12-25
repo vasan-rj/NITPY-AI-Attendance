@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Settings</title>
+    <style>
+        /* Basic Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            color: #555;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        .action-buttons button {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        .add-button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Faculty Settings</h1>
+
+    <!-- Profile Section -->
+    <div class="section" id="profile-settings">
+        <h2>Profile Information</h2>
+        <label for="faculty-id">Faculty ID</label>
+        <input type="text" id="faculty-id" placeholder="xxx" value={{username}} required>
+
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="e.g. DR.Leo Das" required>
+
+        <label for="department">Department</label>
+        <select id="department">
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="CIVIL">CIVIL</option>
+            <option value="MECH">MECH</option>
+        </select>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" value="faculty@example.com" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" value="+91-9876543210" required>
+    </div>
+
+    <!-- Subjects Section -->
+    <div class="section">
+        <h2>Subjects Handled</h2>
+        <label for="subject-name">Subject Name</label>
+        <input type="text" id="subject-name">
+
+        <label for="subject-code">Subject Code</label>
+        <input type="text" id="subject-code">
+
+        <label for="batch">Batch</label>
+        <input type="text" id="batch" placeholder="e.g., 2021-2025">
+
+        <button class="add-button" onclick="addSubject()">Add Subject</button>
+
+        <!-- Subjects Table -->
+        <table id="subjects-table">
+            <thead>
+                <tr>
+                    <th>Subject Name</th>
+                    <th>Subject Code</th>
+                    <th>Batch</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Subject rows will be added here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Password Section -->
+    <div class="section" id="password-settings">
+        <h2>Change Password</h2>
+        <label for="current-password">Current Password</label>
+        <input type="password" id="current-password" placeholder="Enter current password">
+
+        <label for="new-password">New Password</label>
+        <input type="password" id="new-password" placeholder="Enter new password">
+
+        <label for="confirm-password">Confirm New Password</label>
+        <input type="password" id="confirm-password" placeholder="Re-enter new password">
+    </div>
+
+    <!-- Save Button -->
+    <div style="text-align: center;">
+        <button onclick="saveChanges()">Save Changes</button>
+    </div>
+</div>
+
+<script>
+    // Add Subject to Table
+    function addSubject() {
+        const subjectName = document.getElementById("subject-name").value;
+        const subjectCode = document.getElementById("subject-code").value;
+        const batch = document.getElementById("batch").value;
+
+        if (!subjectName || !subjectCode || !batch) {
+            alert("Please fill out all fields for the subject.");
+            return;
+        }
+
+        const table = document.getElementById("subjects-table").getElementsByTagName("tbody")[0];
+        const newRow = table.insertRow();
+        newRow.innerHTML = `
+            <td>${subjectName}</td>
+            <td>${subjectCode}</td>
+            <td>${batch}</td>
+            <td class="action-buttons">
+                <button onclick="editRow(this)">Edit</button>
+                <button onclick="deleteRow(this)">Delete</button>
+                
+            </td>
+        `;
+
+        // Clear input fields after adding
+        document.getElementById("subject-name").value = "";
+        document.getElementById("subject-code").value = "";
+        document.getElementById("batch").value = "";
+    }
+
+    // Edit Row in Table
+    function editRow(button) {
+        const row = button.parentNode.parentNode;
+        document.getElementById("subject-name").value = row.cells[0].textContent;
+        document.getElementById("subject-code").value = row.cells[1].textContent;
+        document.getElementById("batch").value = row.cells[2].textContent;
+        
+        // Remove the existing row so it can be replaced
+        row.remove();
+    }
+
+    // Delete Row from Table
+    function deleteRow(button) {
+        const row = button.parentNode.parentNode;
+        row.remove();
+    }
+
+    // Save Changes
+    function saveChanges() {
+        // Gather all information
+        const facultyId = document.getElementById("faculty-id").value;
+        const name = document.getElementById("name").value;
+        const department = document.getElementById("department").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+
+        const currentPassword = document.getElementById("current-password").value;
+        const newPassword = document.getElementById("new-password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+
+        if (newPassword && newPassword !== confirmPassword) {
+            alert("New passwords do not match.");
+            return;
+        }
+
+        // Gather subjects
+        const subjects = [];
+        const rows = document.querySelectorAll("#subjects-table tbody tr");
+        rows.forEach(row => {
+            const cells = row.cells;
+            subjects.push({
+                name: cells[0].textContent,
+                code: cells[1].textContent,
+                batch: cells[2].textContent,
+            });
+        });
+
+        // Structure data for backend
+        const data = {
+            facultyId,
+            name,
+            department,
+            email,
+            phone,
+            subjects,
+        };
+
+        if (currentPassword) {
+            data.newPassword = newPassword;
+        }
+        console.error(data);
+        // Send data to server
+        fetch('/update_faculty_settings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => alert(data.message))
+        .catch(error => console.error('Error:', error));
+        alert("Settings Saved !!");
+    }
+</script>
+
+</body>
+</html>

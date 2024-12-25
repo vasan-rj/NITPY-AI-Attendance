@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Settings</title>
+    <style>
+        /* Basic Styling */
+        /* (Your existing CSS code here) */
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Your existing HTML structure here -->
+
+<!-- Add Students Modal -->
+<div id="studentModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>Select Students to Enroll</h3>
+        <div id="studentList">
+            <!-- Students checkboxes will be populated here dynamically -->
+        </div>
+        <button onclick="enrollStudents()">Enroll Selected Students</button>
+    </div>
+</div>
+
+<script>
+    let selectedSubjectCode = null;
+
+    // Add "Add Students" Button in Subject Row
+    function addSubject() {
+        const subjectName = document.getElementById("subject-name").value;
+        const subjectCode = document.getElementById("subject-code").value;
+        const batch = document.getElementById("batch").value;
+
+        if (!subjectName || !subjectCode || !batch) {
+            alert("Please fill out all fields for the subject.");
+            return;
+        }
+
+        const table = document.getElementById("subjects-table").getElementsByTagName("tbody")[0];
+        const newRow = table.insertRow();
+        newRow.innerHTML = `
+            <td>${subjectName}</td>
+            <td>${subjectCode}</td>
+            <td>${batch}</td>
+            <td class="action-buttons">
+                <button onclick="editRow(this)">Edit</button>
+                <button onclick="deleteRow(this)">Delete</button>
+                <button onclick="showStudentModal('${subjectCode}')">Add Students</button>
+            </td>
+        `;
+
+        document.getElementById("subject-name").value = "";
+        document.getElementById("subject-code").value = "";
+        document.getElementById("batch").value = "";
+    }
+
+    // Show Modal to Select Students
+    function showStudentModal(subjectCode) {
+        selectedSubjectCode = subjectCode;
+        document.getElementById("studentModal").style.display = "block";
+        
+        // Fetch students from the database
+        fetch('/get_students')
+            .then(response => response.json())
+            .then(data => {
+                const studentList = document.getElementById("studentList");
+                studentList.innerHTML = '';
+                data.students.forEach(student => {
+                    const studentDiv = document.createElement("div");
+                    studentDiv.innerHTML = `
+                        <input type="checkbox" id="student-${student._id}" value="${student._id}">
+                        <label for="student-${student._id}">${student.name}</label>
+                    `;
+                    studentList.appendChild(studentDiv);
+                });
+            })
+            .catch(error => console.error("Error fetching students:", error));
+    }
+
+    // Close Modal
+    function closeModal() {
+        document.getElementById("studentModal").style.display = "none";
+    }
+
+    // Enroll Selected Students
+    function enrollStudents() {
+        const selectedStudents = [];
+        document.querySelectorAll("#studentList input[type='checkbox']:checked").forEach(checkbox => {
+            selectedStudents.push(checkbox.value);
+        });
+
+        if (selectedStudents.length === 0) {
+            alert("Please select at least one student to enroll.");
+            return;
+        }
+
+        // Send enrolled students to backend
+        fetch('/enroll_students', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ subjectCode: selectedSubjectCode, students: selectedStudents })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            closeModal();
+        })
+        .catch(error => console.error("Error enrolling students:", error));
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Records</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+            padding: 20px;
+        }
+
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center; /* Center align the table data */
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f1f1f1;
+        }
+
+        tr:hover td {
+            background-color: #f0f0f0;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .send-mail-btn, .select-all-btn, .home-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 0 10px;
+        }
+
+        .send-mail-btn:hover, .select-all-btn:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Attendance Records</h2>
+
+        <!-- Flash Message -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <script>
+                alert("{{ messages[0][1] }}");  // Displaying the flash message in popup
+            </script>
+        {% endif %}
+        {% endwith %}
+
+        {% if error_message %}
+        <p class="error-message">Error: {{ error_message }}</p>
+        {% else %}
+        <form method="POST">
+            {% for record in attendance_data %}
+                <h3>Subject: {{ record.subject }} | Date: {{ record.date }}</h3>
+
+                <!-- Hidden fields to send subject, date, and time to the backend -->
+                <input type="hidden" name="subject" value="{{ record.subject }}">
+                <input type="hidden" name="date" value="{{ record.date }}">
+                <input type="hidden" name="time" value="{{ record.time or "N/A"}}">
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Roll Number</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Select for Mail</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for student in record.students %}
+                                <tr>
+                                    <td>{{ student.roll_number }}</td>
+                                    <td>{{ student.name }}</td>
+                                    <td>{{ student.email }}</td>
+                                    <td>
+                                        <input type="checkbox" class="student-checkbox" name="email_addresses" value="{{ student.email }}">
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endfor %}
+            
+            <div class="button-container">
+                <button class="select-all-btn" type="button" onclick="selectAll()">Select All</button>
+                <button class="send-mail-btn" type="submit">Send Mail</button>
+                <a href="/dashboard_faculty" class="home-btn">Go Home</a>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+
+    <script>
+        // Function to select/unselect all checkboxes
+        function selectAll() {
+            const checkboxes = document.querySelectorAll('.student-checkbox');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = true;  // Check all checkboxes
+            });
+        }
+    </script>
+</body>
+</html>

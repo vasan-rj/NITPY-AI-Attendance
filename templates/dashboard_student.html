@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_student.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="brand">
+                <h2>NITPY AI Attendance</h2>
+            </div>
+            <ul class="menu">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Apps</a></li>
+                <li><a href="#">Payroll</a></li>
+                <li><a href="#">Policies</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Performance</a></li>
+                
+                <li><a href="{{ url_for('student_settings') }}">Settings</a></li>
+                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+
+
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1>Welcome {{username}}</h1>
+                <div class="search-profile">
+                    <input type="text" placeholder="Search here...">
+                    <div class="profile-pic">
+                        <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Profile">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Panels -->
+            <div class="dashboard">
+                <!-- Timesheet -->
+                <div class="card timesheet">
+                    <h2>Timesheet</h2>
+                    <p>Punch in at: Wed, 11 Mar 2019 10:00 AM</p>
+                    <div class="hours">
+                        <h3>3.45 hrs</h3>
+                        <button>Punch Out</button>
+                    </div>
+                    <p>BREAK: 1.25 hrs | Overtime: 3 hrs</p>
+                </div>
+
+                <!-- Statistics -->
+                <div class="card statistics">
+                    <h2>Statistics</h2>
+                    <ul>
+                        <li>Today: 3.45 / 8 hrs</li>
+                        <li>This Week: 36 / 40 hrs</li>
+                        <li>This Month: 70 / 80 hrs</li>
+                        <li>Remaining: 10 hrs</li>
+                        <li>Overtime: 5 hrs</li>
+                    </ul>
+                </div>
+
+                <!-- Today's Activity -->
+                <div class="card today-activity">
+                    <h2>Today's Activity</h2>
+                    <ul>
+                        <li>Punch in at: 10:00 AM</li>
+                        <li>Punch out at: 12:00 PM</li>
+                        <li>Punch in at: 01:00 PM</li>
+                        <li>Punch out at: 03:00 PM</li>
+                        <li>Punch in at: 04:00 PM</li>
+                        <li>Punch out at: 06:00 PM</li>
+                    </ul>
+                </div>
+
+                <!-- Attendance List -->
+                <div class="card attendance-list">
+                    <h2>Attendance List</h2>
+                    <table>
+                        <tr>
+                            <th>S. No</th>
+                            <th>Date</th>
+                            <th>Punch In</th>
+                            <th>Punch Out</th>
+                            <th>Production</th>
+                            <th>Break</th>
+                            <th>Overtime</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>19 Feb 2019</td>
+                            <td>10 AM</td>
+                            <td>7 PM</td>
+                            <td>9 hrs</td>
+                            <td>1 hr</td>
+                            <td>2 hrs</td>
+                        </tr>
+                        <!-- More rows as needed -->
+                    </table>
+                </div>
+
+                <!-- Daily Records -->
+                <div class="card daily-records">
+                    <h2>Daily Records</h2>
+                    <div class="chart">
+                        <!-- Placeholder for chart - replace with actual chart if needed -->
+                        <p>Chart Visualization</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+        }
+        
+        .brand h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .menu {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .menu li {
+            margin-bottom: 15px;
+        }
+        
+        .menu li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background-color: #f4f6f9;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        header .search-profile {
+            display: flex;
+            align-items: center;
+        }
+        
+        header input[type="text"] {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-right: 15px;
+        }
+        
+        header .profile-pic img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timesheet .hours {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .timesheet .hours h3 {
+            font-size: 2rem;
+            color: #007bff;
+        }
+        
+        .timesheet button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .statistics ul,
+        .today-activity ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .statistics li,
+        .today-activity li {
+            margin-bottom: 10px;
+        }
+        
+        .attendance-list table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .attendance-list th,
+        .attendance-list td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .daily-records .chart {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f4f6f9;
+            border-radius: 8px;
+            color: #007bff;
+            font-size: 1.2rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .dashboard {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .sidebar {
+                display: none;
+            }
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .search-profile {
+                margin-top: 10px;
+            }
+            .main-content {
+                padding: 10px;
+            }
+        }
+    </style>
+</body>
+</html>
