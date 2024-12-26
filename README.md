@@ -93,7 +93,7 @@ ai_attendance_system/
 3. **⚙️ Settings Page**
    - Both students and faculty can update their profiles via the settings page.
    - ![Student Settings Page](screenshots/student-setting.png)
-   - ![Faculty Settings Page](screenshots/fsclt-settings.png)
+   - ![Faculty Settings Page](screenshots/fscult-settings.png)
 
 ---
 
