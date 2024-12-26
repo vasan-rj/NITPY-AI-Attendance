@@ -86,13 +86,14 @@ ai_attendance_system/
 
 1. **👨‍🎓 Student Login**
    - Students can log in to view their attendance records.
-   - ![Student Login](screenshots/student-login.png)
+   - ![Student Login](screenshots/student-login.jpg)
 2. **👩‍🏫 Faculty Login**
    - Faculty can log in to manage attendance and update settings.
-   - ![Faculty Login](screenshots/faculty-login.png)
+   - ![Faculty Login](screenshots/faculty-login.jpg)
 3. **⚙️ Settings Page**
    - Both students and faculty can update their profiles via the settings page.
-   - ![Settings Page](screenshots/fsclt-settings.png)
+   - ![Student Settings Page](screenshots/student-setting.png)
+   - ![Faculty Settings Page](screenshots/fsclt-settings.png)
 
 ---
 
@@ -113,20 +114,21 @@ ai_attendance_system/
  <!-- <div >-->
 
 - **System Architecture**:
-  ![Architecture](screenshots/architecture.png)
+  ![Architecture](screenshots/architecture.jpg)
 - **Augmented Faces**:
-  ![Augmented Faces](screenshots/augmented-faces.png)
+  ![Augmented Faces](screenshots/augumented-faces.png)
 - **Faculty Interface**:
   ![Faculty Interface](screenshots/faculty-interface.png)
 - **Student Interface**:
   ![Student Interface](screenshots/student-interface.png)
 - **Attendance Record**:
-  ![Take Attendance](screenshots/take-attendence.png)
+  ![Take Attendance](screenshots/take-attendence.jpg)
 - **YOLO Model Comparison**:
   ![YOLO Model Comparison](screenshots/yolo-model-comparison.png)
 - **Sample Input Data**:
   ![Sample Input](screenshots/sample-input.png)
 - **Email Notification**:
+  ![Mail](screenshots/mail.jpg)
   ![Mail Output](screenshots/mail-output.png)
 
 ---
